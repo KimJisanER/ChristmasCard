@@ -79,27 +79,30 @@
             animation: crossfade 4s infinite ease-in-out;
         }
 
-        /* 음악 버튼 스타일 */
+        /* 음악 버튼 스타일 (수정: 더 작고 눈에 덜 띄게) */
         #music-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 100;
-            background: rgba(239, 68, 68, 0.8); /* Red-500 with opacity */
-            border: none;
+            background: rgba(255, 255, 255, 0.15); /* 반투명한 흰색 */
+            backdrop-filter: blur(5px); /* 배경 블러 처리 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 38px; /* 크기 축소 (기존 50px) */
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            opacity: 0.5; /* 평소 투명도 */
         }
         #music-toggle:hover {
+            opacity: 1; /* 호버 시에만 명확하게 보임 */
+            background: rgba(239, 68, 68, 0.5); /* 호버 시 크리스마스 분위기 살짝 */
             transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
         }
 
         /* 모바일 대응 */
@@ -119,9 +122,9 @@
         <source src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 음악 컨트롤 버튼 -->
+    <!-- 음악 컨트롤 버튼 (아이콘 크기도 축소됨) -->
     <button id="music-toggle" title="음악 켜기/끄기">
-        <svg id="music-icon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="music-icon" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <!-- 기본 상태: 음소거 아이콘 -->
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
             <path id="mute-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
@@ -171,28 +174,25 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-800 border-b border-slate-700">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-blue-100 drop-shadow-lg font-christmas">The First Gift</h2>
         <div id="gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 파란 꽃 (가장 아래 깔려있음) -->
+            <!-- 파란 꽃 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/blue_flower.png" 
                  alt="Blue Flower"
                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in"
                  id="img-flower"
                  style="opacity: 0;">
             
-            <!-- 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box3.png" 
                  alt="Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="img-box3"
                  style="opacity: 0;">
 
-            <!-- 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box2.png" 
                  alt="Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="img-box2"
                  style="opacity: 0;">
 
-            <!-- 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box1.png" 
                  alt="Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -209,33 +209,27 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-900 border-b border-slate-800">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-yellow-100 drop-shadow-lg font-christmas">Cute Friend</h2>
         <div id="gold-gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 강아지 컨테이너 (박스 뒤에 숨어있음) -->
             <div id="dog-wrapper" class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in opacity-0">
-                <!-- Dog 1 (베이스) -->
                 <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/dog.png" 
                      alt="Cute Dog 1"
                      class="absolute inset-0 w-full h-full object-contain">
-                <!-- Dog 2 (깜빡이며 전환 효과) -->
                 <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/dog2.png" 
                      alt="Cute Dog 2"
                      class="absolute inset-0 w-full h-full object-contain dog-animation">
             </div>
 
-            <!-- 황금 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold3.png" 
                  alt="Gold Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="gold-box3"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold2.png" 
                  alt="Gold Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="gold-box2"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold.png" 
                  alt="Gold Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -252,28 +246,24 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-800 border-b border-slate-700">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-pink-100 drop-shadow-lg font-christmas">You Make Me Smile</h2>
         <div id="cookie-gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 쿠키 (가장 아래 깔려있음) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/cookies.png" 
                  alt="Delicious Cookies"
                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in"
                  id="img-real-cookies"
                  style="opacity: 0;">
             
-            <!-- 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box3.png" 
                  alt="Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="cookie-box3"
                  style="opacity: 0;">
 
-            <!-- 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box2.png" 
                  alt="Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="cookie-box2"
                  style="opacity: 0;">
 
-            <!-- 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box1.png" 
                  alt="Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -290,28 +280,24 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-900 border-b border-slate-800">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-yellow-100 drop-shadow-lg font-christmas">Partner for Life</h2>
         <div id="yellow-gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 노란 꽃 (가장 아래 깔려있음) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/yellow_flower.png" 
                  alt="Yellow Flower"
                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in"
                  id="img-yellow-flower"
                  style="opacity: 0;">
             
-            <!-- 황금 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold3.png" 
                  alt="Gold Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="yellow-box3"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold2.png" 
                  alt="Gold Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="yellow-box2"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold.png" 
                  alt="Gold Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -328,28 +314,24 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-800 border-b border-slate-700">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-purple-100 drop-shadow-lg font-christmas">The Sun and The Tree</h2>
         <div id="rings-gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 반지 (가장 아래 깔려있음) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/rings.png" 
                  alt="Wedding Rings"
                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in"
                  id="img-rings"
                  style="opacity: 0;">
             
-            <!-- 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box3.png" 
                  alt="Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="rings-box3"
                  style="opacity: 0;">
 
-            <!-- 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box2.png" 
                  alt="Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="rings-box2"
                  style="opacity: 0;">
 
-            <!-- 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box1.png" 
                  alt="Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -366,28 +348,24 @@
     <section class="h-screen flex flex-col items-center justify-center relative z-10 bg-slate-900 border-b border-slate-800">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-yellow-100 drop-shadow-lg font-christmas">So happy to be yours</h2>
         <div id="hanbok-gift-container" class="relative w-64 h-64 md:w-80 md:h-80 cursor-pointer transition-transform hover:scale-105 active:scale-95">
-            <!-- 한복 (가장 아래 깔려있음) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/hanbok.png" 
                  alt="Beautiful Hanbok"
                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in"
                  id="img-hanbok"
                  style="opacity: 0;">
             
-            <!-- 황금 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold3.png" 
                  alt="Gold Box step 3"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="hanbok-box3"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold2.png" 
                  alt="Gold Box step 2"
                  class="absolute inset-0 w-full h-full object-contain"
                  id="hanbok-box2"
                  style="opacity: 0;">
 
-            <!-- 황금 박스 1 (가장 위) -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box_gold.png" 
                  alt="Gold Box step 1"
                  class="absolute inset-0 w-full h-full object-contain"
@@ -476,7 +454,6 @@
             }
         });
 
-        // 사용자가 처음 화면을 클릭하면 자동으로 음악 시작 시도 (브라우저 정책 대응)
         document.body.addEventListener('click', () => {
             if (music.paused && muteLine.style.display !== 'block') {
                 music.play().catch(() => {});
@@ -486,7 +463,7 @@
 
 
         /**
-         * 1. 눈 내리는 효과 (Snow Effect) 구현
+         * 1. 눈 내리는 효과 (Snow Effect)
          */
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
@@ -497,7 +474,7 @@
         canvas.height = height;
 
         const snowflakes = [];
-        const maxSnowflakes = 150; // 눈송이 개수
+        const maxSnowflakes = 150;
 
         class Snowflake {
             constructor() {
@@ -506,10 +483,10 @@
 
             reset() {
                 this.x = Math.random() * width;
-                this.y = Math.random() * height - height; // 화면 위쪽에서 시작
-                this.radius = Math.random() * 3 + 1; // 눈송이 크기
-                this.speed = Math.random() * 2 + 1; // 낙하 속도
-                this.wind = Math.random() * 1 - 0.5; // 좌우 흔들림
+                this.y = Math.random() * height - height;
+                this.radius = Math.random() * 3 + 1;
+                this.speed = Math.random() * 2 + 1;
+                this.wind = Math.random() * 1 - 0.5;
                 this.opacity = Math.random() * 0.5 + 0.3;
             }
 
@@ -579,230 +556,50 @@
         });
 
         /**
-         * 3. 첫 번째 선물 상자 (파란 꽃)
+         * 3. 선물 상자 공통 로직 (Helper)
          */
-        const giftContainer = document.getElementById('gift-container');
-        const imgBox1 = document.getElementById('img-box1');
-        const imgBox2 = document.getElementById('img-box2');
-        const imgBox3 = document.getElementById('img-box3');
-        const imgFlower = document.getElementById('img-flower');
-        const clickHint = document.getElementById('click-hint');
+        function setupGift(containerId, boxIds, contentId, hintId) {
+            const container = document.getElementById(containerId);
+            const box1 = document.getElementById(boxIds[0]);
+            const box2 = document.getElementById(boxIds[1]);
+            const box3 = document.getElementById(boxIds[2]);
+            const content = document.getElementById(contentId);
+            const hint = document.getElementById(hintId);
 
-        let isGiftOpened = false;
+            let opened = false;
+            container.addEventListener('click', () => {
+                if (opened) return;
+                opened = true;
+                if (hint) hint.style.display = 'none';
 
-        giftContainer.addEventListener('click', () => {
-            if (isGiftOpened) return;
-            isGiftOpened = true;
-            clickHint.style.display = 'none';
-
-            imgBox1.style.opacity = '0';
-            imgBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                imgBox2.style.opacity = '0';
-                imgBox3.style.opacity = '1';
+                box1.style.opacity = '0';
+                box2.style.opacity = '1';
 
                 setTimeout(() => {
-                    imgBox3.style.transition = 'opacity 0.5s ease-out';
-                    imgBox3.style.opacity = '0';
-                    imgFlower.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
+                    box2.style.opacity = '0';
+                    box3.style.opacity = '1';
 
-        /**
-         * 4. 두 번째 선물 상자 (황금 박스 & 강아지)
-         */
-        const goldGiftContainer = document.getElementById('gold-gift-container');
-        const goldBox1 = document.getElementById('gold-box1');
-        const goldBox2 = document.getElementById('gold-box2');
-        const goldBox3 = document.getElementById('gold-box3');
-        const dogWrapper = document.getElementById('dog-wrapper');
-        const goldClickHint = document.getElementById('gold-click-hint');
+                    setTimeout(() => {
+                        box3.style.transition = 'opacity 0.5s ease-out';
+                        box3.style.opacity = '0';
+                        content.style.opacity = '1';
+                        if (contentId === 'letter-content') {
+                            content.classList.remove('scale-95');
+                            content.classList.add('scale-100');
+                        }
+                    }, 300);
+                }, 200);
+            });
+        }
 
-        let isGoldGiftOpened = false;
-
-        goldGiftContainer.addEventListener('click', () => {
-            if (isGoldGiftOpened) return;
-            isGoldGiftOpened = true;
-            goldClickHint.style.display = 'none';
-
-            goldBox1.style.opacity = '0';
-            goldBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                goldBox2.style.opacity = '0';
-                goldBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    goldBox3.style.transition = 'opacity 0.5s ease-out';
-                    goldBox3.style.opacity = '0';
-                    dogWrapper.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
-
-        /**
-         * 5. 세 번째 선물 상자 (쿠키)
-         */
-        const cookieGiftContainer = document.getElementById('cookie-gift-container');
-        const cookieBox1 = document.getElementById('cookie-box1');
-        const cookieBox2 = document.getElementById('cookie-box2');
-        const cookieBox3 = document.getElementById('cookie-box3');
-        const imgRealCookies = document.getElementById('img-real-cookies');
-        const cookieClickHint = document.getElementById('cookie-click-hint');
-
-        let isCookieGiftOpened = false;
-
-        cookieGiftContainer.addEventListener('click', () => {
-            if (isCookieGiftOpened) return;
-            isCookieGiftOpened = true;
-            cookieClickHint.style.display = 'none';
-
-            cookieBox1.style.opacity = '0';
-            cookieBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                cookieBox2.style.opacity = '0';
-                cookieBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    cookieBox3.style.transition = 'opacity 0.5s ease-out';
-                    cookieBox3.style.opacity = '0';
-                    imgRealCookies.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
-
-        /**
-         * 6. 네 번째 선물 상자 (노란 꽃)
-         */
-        const yellowGiftContainer = document.getElementById('yellow-gift-container');
-        const yellowBox1 = document.getElementById('yellow-box1');
-        const yellowBox2 = document.getElementById('yellow-box2');
-        const yellowBox3 = document.getElementById('yellow-box3');
-        const imgYellowFlower = document.getElementById('img-yellow-flower');
-        const yellowClickHint = document.getElementById('yellow-click-hint');
-
-        let isYellowGiftOpened = false;
-
-        yellowGiftContainer.addEventListener('click', () => {
-            if (isYellowGiftOpened) return;
-            isYellowGiftOpened = true;
-            yellowClickHint.style.display = 'none';
-
-            yellowBox1.style.opacity = '0';
-            yellowBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                yellowBox2.style.opacity = '0';
-                yellowBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    yellowBox3.style.transition = 'opacity 0.5s ease-out';
-                    yellowBox3.style.opacity = '0';
-                    imgYellowFlower.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
-
-        /**
-         * 7. 다섯 번째 선물 상자 (반지)
-         */
-        const ringsGiftContainer = document.getElementById('rings-gift-container');
-        const ringsBox1 = document.getElementById('rings-box1');
-        const ringsBox2 = document.getElementById('rings-box2');
-        const ringsBox3 = document.getElementById('rings-box3');
-        const imgRings = document.getElementById('img-rings');
-        const ringsClickHint = document.getElementById('rings-click-hint');
-
-        let isRingsGiftOpened = false;
-
-        ringsGiftContainer.addEventListener('click', () => {
-            if (isRingsGiftOpened) return;
-            isRingsGiftOpened = true;
-            ringsClickHint.style.display = 'none';
-
-            ringsBox1.style.opacity = '0';
-            ringsBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                ringsBox2.style.opacity = '0';
-                ringsBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    ringsBox3.style.transition = 'opacity 0.5s ease-out';
-                    ringsBox3.style.opacity = '0';
-                    imgRings.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
-
-        /**
-         * 8. 여섯 번째 선물 상자 (한복)
-         */
-        const hanbokGiftContainer = document.getElementById('hanbok-gift-container');
-        const hanbokBox1 = document.getElementById('hanbok-box1');
-        const hanbokBox2 = document.getElementById('hanbok-box2');
-        const hanbokBox3 = document.getElementById('hanbok-box3');
-        const imgHanbok = document.getElementById('img-hanbok');
-        const hanbokClickHint = document.getElementById('hanbok-click-hint');
-
-        let isHanbokGiftOpened = false;
-
-        hanbokGiftContainer.addEventListener('click', () => {
-            if (isHanbokGiftOpened) return;
-            isHanbokGiftOpened = true;
-            hanbokClickHint.style.display = 'none';
-
-            hanbokBox1.style.opacity = '0';
-            hanbokBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                hanbokBox2.style.opacity = '0';
-                hanbokBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    hanbokBox3.style.transition = 'opacity 0.5s ease-out';
-                    hanbokBox3.style.opacity = '0';
-                    imgHanbok.style.opacity = '1';
-                }, 300);
-            }, 200);
-        });
-
-        /**
-         * 9. 일곱 번째 선물 상자 (편지)
-         */
-        const letterGiftContainer = document.getElementById('letter-gift-container');
-        const letterBox1 = document.getElementById('letter-box1');
-        const letterBox2 = document.getElementById('letter-box2');
-        const letterBox3 = document.getElementById('letter-box3');
-        const letterContent = document.getElementById('letter-content');
-        const letterClickHint = document.getElementById('letter-click-hint');
-
-        let isLetterGiftOpened = false;
-
-        letterGiftContainer.addEventListener('click', () => {
-            if (isLetterGiftOpened) return;
-            isLetterGiftOpened = true;
-            letterClickHint.style.display = 'none';
-
-            letterBox1.style.opacity = '0';
-            letterBox2.style.opacity = '1';
-
-            setTimeout(() => {
-                letterBox2.style.opacity = '0';
-                letterBox3.style.opacity = '1';
-
-                setTimeout(() => {
-                    letterBox3.style.transition = 'opacity 0.5s ease-out';
-                    letterBox3.style.opacity = '0';
-                    letterContent.style.opacity = '1';
-                    letterContent.classList.remove('scale-95');
-                    letterContent.classList.add('scale-100'); 
-                }, 300);
-            }, 200);
-        });
+        // 각 섹션 선물 상자 설정
+        setupGift('gift-container', ['img-box1', 'img-box2', 'img-box3'], 'img-flower', 'click-hint');
+        setupGift('gold-gift-container', ['gold-box1', 'gold-box2', 'gold-box3'], 'dog-wrapper', 'gold-click-hint');
+        setupGift('cookie-gift-container', ['cookie-box1', 'cookie-box2', 'cookie-box3'], 'img-real-cookies', 'cookie-click-hint');
+        setupGift('yellow-gift-container', ['yellow-box1', 'yellow-box2', 'yellow-box3'], 'img-yellow-flower', 'yellow-click-hint');
+        setupGift('rings-gift-container', ['rings-box1', 'rings-box2', 'rings-box3'], 'img-rings', 'rings-click-hint');
+        setupGift('hanbok-gift-container', ['hanbok-box1', 'hanbok-box2', 'hanbok-box3'], 'img-hanbok', 'hanbok-click-hint');
+        setupGift('letter-gift-container', ['letter-box1', 'letter-box2', 'letter-box3'], 'letter-content', 'letter-click-hint');
 
     </script>
 </body>
