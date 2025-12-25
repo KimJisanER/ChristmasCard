@@ -79,6 +79,29 @@
             animation: crossfade 4s infinite ease-in-out;
         }
 
+        /* 음악 버튼 스타일 */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(239, 68, 68, 0.8); /* Red-500 with opacity */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        #music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(220, 38, 38, 1);
+        }
+
         /* 모바일 대응 */
         @media (max-width: 768px) {
             .card-image {
@@ -90,6 +113,20 @@
     </style>
 </head>
 <body>
+
+    <!-- 오디오 요소 (loop: 반복 재생) -->
+    <audio id="bg-music" loop>
+        <source src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 음악 컨트롤 버튼 -->
+    <button id="music-toggle" title="음악 켜기/끄기">
+        <svg id="music-icon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- 기본 상태: 음소거 아이콘 -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path id="mute-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+        </svg>
+    </button>
 
     <!-- 눈 내리는 효과를 위한 캔버스 -->
     <canvas id="snow-canvas"></canvas>
@@ -367,15 +404,11 @@
     <section class="min-h-screen flex flex-col items-center justify-center relative z-10 bg-slate-800 py-10">
         <h2 class="text-3xl md:text-5xl font-bold mb-8 text-rose-200 drop-shadow-lg font-christmas">For My Love</h2>
         
-        <!-- 편지 컨테이너 수정: 화면 크기에 맞춰 유연하게 반응하도록 조정 -->
         <div id="letter-gift-container" class="relative w-[95vw] h-[60vh] md:w-[800px] md:h-[500px] cursor-pointer transition-transform hover:scale-[1.02] active:scale-100">
             
-            <!-- 편지 내용 (가장 아래 깔려있음) -->
-            <!-- text-center, items-center 제거하여 왼쪽 정렬 / p-8 md:p-12로 여백 조정 -->
             <div id="letter-content" 
                  class="absolute inset-0 w-full h-full bg-[#fffdf5] rounded-xl shadow-2xl p-8 md:p-16 flex flex-col justify-center text-left opacity-0 transition-opacity duration-1000 ease-in transform scale-95 border-4 border-rose-100 font-handwriting">
                 
-                <!-- 받는 사람 제목 없이 바로 본문 시작 -->
                 <div class="text-slate-800 text-xl md:text-3xl leading-snug md:leading-relaxed whitespace-pre-line break-keep w-full">
                     메리 크리스마스! 내 사랑 금냐냐
                     냐냐와 함께하는 아침 일상이 나에게는 성탄절 아침처럼 선물같은 나날이야
@@ -387,22 +420,18 @@
                 </div>
             </div>
             
-            <!-- 박스 3 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box3.png" 
                  alt="Box step 3"
                  class="absolute inset-0 w-full h-full object-contain pointer-events-none"
                  id="letter-box3"
                  style="opacity: 0;">
 
-            <!-- 박스 2 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box2.png" 
                  alt="Box step 2"
                  class="absolute inset-0 w-full h-full object-contain pointer-events-none"
                  id="letter-box2"
                  style="opacity: 0;">
 
-            <!-- 박스 1 (가장 위) -->
-            <!-- 박스 이미지가 편지 컨테이너 크기에 맞춰 중앙에 위치하도록 object-contain 유지 -->
             <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/box1.png" 
                  alt="Box step 1"
                  class="absolute inset-0 w-full h-full object-contain pointer-events-none"
@@ -417,12 +446,10 @@
 
     <!-- 섹션 10: 엔딩 (Merry Christmas & 가족 사진) -->
     <section class="min-h-screen flex flex-col items-center justify-center relative z-10 bg-black py-20">
-        <!-- 엔딩 텍스트 -->
         <h1 class="font-christmas text-6xl md:text-8xl text-red-600 mb-12 drop-shadow-lg animate-pulse text-center">
             Merry Christmas
         </h1>
         
-        <!-- 가족 사진 -->
         <div class="relative w-[90vw] md:w-[800px]">
              <img src="https://raw.githubusercontent.com/KimJisanER/ChristmasCard/main/assets/family.png" 
                  alt="Happy Family" 
@@ -432,6 +459,32 @@
     </section>
 
     <script>
+        /**
+         * 0. 음악 제어 (Music Control)
+         */
+        const music = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const muteLine = document.getElementById('mute-line');
+
+        musicToggle.addEventListener('click', () => {
+            if (music.paused) {
+                music.play().catch(e => console.log("자동 재생이 차단되었습니다."));
+                muteLine.style.display = 'none'; // 음소거 표시 제거
+            } else {
+                music.pause();
+                muteLine.style.display = 'block'; // 음소거 표시 추가
+            }
+        });
+
+        // 사용자가 처음 화면을 클릭하면 자동으로 음악 시작 시도 (브라우저 정책 대응)
+        document.body.addEventListener('click', () => {
+            if (music.paused && muteLine.style.display !== 'block') {
+                music.play().catch(() => {});
+                muteLine.style.display = 'none';
+            }
+        }, { once: true });
+
+
         /**
          * 1. 눈 내리는 효과 (Snow Effect) 구현
          */
@@ -464,10 +517,9 @@
                 this.y += this.speed;
                 this.x += this.wind;
 
-                // 화면 밖으로 나가면 리셋 (계속 내리는 효과)
                 if (this.y > height) {
                     this.reset();
-                    this.y = -10; // 다시 위로 보냄
+                    this.y = -10;
                 }
             }
 
@@ -480,7 +532,6 @@
             }
         }
 
-        // 초기 눈송이 생성
         for (let i = 0; i < maxSnowflakes; i++) {
             snowflakes.push(new Snowflake());
         }
@@ -576,17 +627,14 @@
             isGoldGiftOpened = true;
             goldClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             goldBox1.style.opacity = '0';
             goldBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 goldBox2.style.opacity = '0';
                 goldBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Dog Animation
                     goldBox3.style.transition = 'opacity 0.5s ease-out';
                     goldBox3.style.opacity = '0';
                     dogWrapper.style.opacity = '1';
@@ -611,17 +659,14 @@
             isCookieGiftOpened = true;
             cookieClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             cookieBox1.style.opacity = '0';
             cookieBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 cookieBox2.style.opacity = '0';
                 cookieBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Cookies
                     cookieBox3.style.transition = 'opacity 0.5s ease-out';
                     cookieBox3.style.opacity = '0';
                     imgRealCookies.style.opacity = '1';
@@ -646,17 +691,14 @@
             isYellowGiftOpened = true;
             yellowClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             yellowBox1.style.opacity = '0';
             yellowBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 yellowBox2.style.opacity = '0';
                 yellowBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Yellow Flower
                     yellowBox3.style.transition = 'opacity 0.5s ease-out';
                     yellowBox3.style.opacity = '0';
                     imgYellowFlower.style.opacity = '1';
@@ -681,17 +723,14 @@
             isRingsGiftOpened = true;
             ringsClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             ringsBox1.style.opacity = '0';
             ringsBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 ringsBox2.style.opacity = '0';
                 ringsBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Rings
                     ringsBox3.style.transition = 'opacity 0.5s ease-out';
                     ringsBox3.style.opacity = '0';
                     imgRings.style.opacity = '1';
@@ -716,17 +755,14 @@
             isHanbokGiftOpened = true;
             hanbokClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             hanbokBox1.style.opacity = '0';
             hanbokBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 hanbokBox2.style.opacity = '0';
                 hanbokBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Hanbok
                     hanbokBox3.style.transition = 'opacity 0.5s ease-out';
                     hanbokBox3.style.opacity = '0';
                     imgHanbok.style.opacity = '1';
@@ -751,22 +787,19 @@
             isLetterGiftOpened = true;
             letterClickHint.style.display = 'none';
 
-            // Box 1 -> Box 2
             letterBox1.style.opacity = '0';
             letterBox2.style.opacity = '1';
 
             setTimeout(() => {
-                // Box 2 -> Box 3
                 letterBox2.style.opacity = '0';
                 letterBox3.style.opacity = '1';
 
                 setTimeout(() => {
-                    // Box 3 -> Letter Content
                     letterBox3.style.transition = 'opacity 0.5s ease-out';
                     letterBox3.style.opacity = '0';
                     letterContent.style.opacity = '1';
                     letterContent.classList.remove('scale-95');
-                    letterContent.classList.add('scale-100'); // 편지가 살짝 커지며 등장 효과
+                    letterContent.classList.add('scale-100'); 
                 }, 300);
             }, 200);
         });
